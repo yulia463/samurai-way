@@ -1,13 +1,22 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header";
-import {Technologies} from "./components/Technologies";
+import Header from "./components/Header";
+import NavBar from "./components/Nav/NavBar";
+import Profile from "./components/Profile/Profile";
+
 
 function App() {
     return (
-        <div className="App">
-            <Header/>
-            <Technologies/>
+        <div className={"BigBlock"}>
+            <div className="App">
+                <Header/>
+
+                <div className={"navAndContent"}>
+                    <NavBar/>
+                    <Profile/>
+                </div>
+
+            </div>
         </div>
     );
 }
