@@ -2,9 +2,9 @@ import React from "react";
 import Styles from './Nav.module.css'
 
 
-const NavBar=()=>{
+const NavBar = () => {
 
-return(
+    return (
         <nav className={Styles.nav}>
             <div><a>Profile</a></div>
             <div><a>Messages</a></div>
@@ -12,7 +12,7 @@ return(
             <div><a>Music</a></div>
             <div><a>Settings</a></div>
         </nav>
-)
+    )
 
 };
 export default NavBar;

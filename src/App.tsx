@@ -7,7 +7,6 @@ import Profile from "./components/Profile/Profile";
 
 function App() {
     return (
-        <div className={"BigBlock"}>
             <div className="App">
                 <Header/>
 
@@ -17,7 +16,6 @@ function App() {
                 </div>
 
             </div>
-        </div>
     );
 }
 
