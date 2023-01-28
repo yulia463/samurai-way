@@ -13,8 +13,6 @@ header img {
 }
 
 .navAndContent {
-    border: 1px solid black;
-
     display: flex;
     width: 100vw;
 }

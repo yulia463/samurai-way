@@ -2,5 +2,8 @@
     width: 20%;
     background-color: #65bfbf;
     height: auto;
-    border: 1px solid #dd9eef;
+}
+
+.item {
+    color: snow;
 }
