@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Profile.module.css'
 import MyPosts from "../MyPosts/MyPosts";
 
-const Profile = () => {
+export const Profile = () => {
 
     return (
         <div>
@@ -16,4 +16,3 @@ const Profile = () => {
         </div>
     )
 };
-export default Profile;

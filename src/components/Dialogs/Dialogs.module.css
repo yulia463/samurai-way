@@ -1,0 +1,26 @@
+.dialogs {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+
+}
+
+.dialogsItem .active{
+
+    color :snow;
+}
+.dialogsItem {
+    padding: 10px;
+}
+
+.dialog {
+padding: 6px;
+}
+
+.messages {
+padding: 10px;
+}
+
+.message {
+padding: 6px;
+}

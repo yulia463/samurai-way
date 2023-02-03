@@ -1,9 +1,21 @@
 .nav {
-    width: 20%;
+    width: 25%;
     background-color: #65bfbf;
     height: auto;
+    padding: 12px;
+
 }
 
 .item {
+    margin-bottom: 12px;
+}
+
+.item a.active {
+    color: black;
+}
+
+a {
+    text-decoration: none;
     color: snow;
+    padding-left: 25px;
 }
