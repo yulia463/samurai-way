@@ -16,3 +16,8 @@ header img {
     display: flex;
     width: 100vw;
 }
+
+.content {
+    width: 80%;
+    background-color: #4eaca3;
+}
