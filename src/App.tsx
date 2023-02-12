@@ -10,11 +10,9 @@ import {Settings} from "./components/Settings/Settings";
 import {Header} from "./components/Header/Header";
 import {DialogsDataType, MessagesDataType, PostDataType, StateType} from "./redux/State";
 
-
 export type AppPropsType = {
     state: StateType
 }
-
 function App(props: AppPropsType) {
     return (
         <BrowserRouter>
@@ -40,5 +38,4 @@ function App(props: AppPropsType) {
 
         </BrowserRouter>);
 }
-
 export default App;
