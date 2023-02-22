@@ -3,6 +3,7 @@ import React from "react";
 export type StateType = {
     profilePage: {
         posts: Array<PostDataType>
+        newPostText:string
     },
     dialogPage: {
         dialogsData: Array<DialogsDataType>,
@@ -29,7 +30,8 @@ export let state: StateType = {
             {id: 1, text: "how do you like my social network?", likesCount: 7},
             {id: 2, text: "have questions ? ", likesCount: 48},
             {id: 3, text: " ask them on my LinkedIn", likesCount: 0}
-        ]
+        ],
+        newPostText:""
     },
     dialogPage: {
         dialogsData: [
@@ -48,12 +50,20 @@ export let state: StateType = {
         ]
     }
 }
-export const addPost = (postMessage:string) =>{
+export const addPost = (postMessage: string) => {
     let newPost = {
-        id:5,
-        text:postMessage,
-        likesCount:0
+        id: 5,
+        text: postMessage,
+        likesCount: 0
     };
 
-state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost)
+
+}
+export const upgradeNewPostText = (newText: string) => {
+    state = {
+        ...state, profilePage: {
+            ...state.profilePage, newPostText: newText
+        }
+    }
 }
