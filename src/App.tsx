@@ -8,12 +8,13 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Header} from "./components/Header/Header";
-import {addPost, DialogsDataType, MessagesDataType, PostDataType, StateType, upgradeNewPostText} from "./redux/State";
+import {DialogsDataType, MessagesDataType, PostDataType, StateType, upgradeNewPostText} from "./redux/State";
 
 export type AppPropsType = {
     state: StateType
-    addPost: (text:string) => void
-    upgradeNewPostText:(newText: string)=>void
+    addPost: () => void
+    upgradeNewPostText: (newText: string) => void
+
 }
 
 function App(props: AppPropsType) {
@@ -31,7 +32,11 @@ function App(props: AppPropsType) {
                                    dialogsData={props.state.dialogPage.dialogsData}
                                    messagesData={props.state.dialogPage.messagesData}
                                />}/>
-                        <Route path={"/profile"} render={() => <Profile addPost={addPost}  profilePage={props.state.profilePage.posts}/>}/>
+                        <Route path={"/profile"}
+                               render={() => <Profile newPostText={props.state.profilePage.newPostText}
+                                                      upgradeNewPostText={props.upgradeNewPostText}
+                                                      addPost={props.addPost}
+                                                      profilePage={props.state.profilePage.posts}/>}/>
                         <Route path={"/news"} render={() => <News/>}/>
                         <Route path={"/music"} render={() => <Music/>}/>
                         <Route path={"/settings"} render={() => <Settings/>}/>

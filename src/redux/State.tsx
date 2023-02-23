@@ -1,9 +1,10 @@
 import React from "react";
+import {rerenderEntireTree} from "../render";
 
 export type StateType = {
     profilePage: {
         posts: Array<PostDataType>
-        newPostText:string
+        newPostText: string
     },
     dialogPage: {
         dialogsData: Array<DialogsDataType>,
@@ -31,7 +32,7 @@ export let state: StateType = {
             {id: 2, text: "have questions ? ", likesCount: 48},
             {id: 3, text: " ask them on my LinkedIn", likesCount: 0}
         ],
-        newPostText:""
+        newPostText: ""
     },
     dialogPage: {
         dialogsData: [
@@ -57,13 +58,18 @@ export const addPost = (postMessage: string) => {
         likesCount: 0
     };
 
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.unshift(newPost)
 
+    state.profilePage.newPostText=""
+    rerenderEntireTree()
 }
 export const upgradeNewPostText = (newText: string) => {
     state = {
-        ...state, profilePage: {
-            ...state.profilePage, newPostText: newText
+        ...state,
+        profilePage: {
+            ...state.profilePage,
+            newPostText: newText
         }
     }
+rerenderEntireTree()
 }
