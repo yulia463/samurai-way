@@ -1,14 +1,20 @@
 import React from "react";
+import {profileReducer} from "./ProfileReducer";
+import {dialogsReducer} from "./DialogsReducer";
 
+export type ProfilePagesType = {
+    posts: Array<PostDataType>
+    newPostText: string
+}
+export type DialogsPagesType = {
+    dialogsData: Array<DialogsDataType>,
+    messagesData: Array<MessagesDataType>
+    newMessageBody: string
+
+}
 export type StoreType = {
-    profilePage: {
-        posts: Array<PostDataType>
-        newPostText: string
-    },
-    dialogPage: {
-        dialogsData: Array<DialogsDataType>,
-        messagesData: Array<MessagesDataType>
-    }
+    profilePage: ProfilePagesType,
+    dialogPage: DialogsPagesType
 }
 export type MessagesDataType = {
     id: number
@@ -24,7 +30,10 @@ export type PostDataType = {
     likesCount: number
 }
 
-export type ActionsTypes= ReturnType<typeof addPostAC> | ReturnType<typeof updateNewTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> |
+    ReturnType<typeof updateNewTextAC> |
+    ReturnType<typeof updateNewMessageBodyAC> |
+    ReturnType<typeof sendMessageAC>
 
 export type StorePropsType = {
     _state: StoreType
@@ -33,19 +42,32 @@ export type StorePropsType = {
     _callSubscriber: (state: StoreType) => void
     getState: () => StoreType
     dispatch: (action: ActionsTypes) => void
+
 }
-export const addPostAC =(postText:string)=>{
+export const addPostAC = (postText: string) => {
     return {
-        type:'ADD-POST',
-        newPostText:postText
+        type: 'ADD-POST',
+        newPostText: postText
     } as const
-}
-export const updateNewTextAC =(postText:string)=>{
+};
+export const updateNewTextAC = (postText: string) => {
     return {
-        type:'UPDATE-NEW-POST-TEXT',
-        newText:postText
-    }as const
-}
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: postText
+    } as const
+};
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: 'UPDATE_NEW_MESSAGE_BODY',
+        body: body
+    } as const
+};
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND_MESSAGE'
+    } as const
+};
+
 let store: StorePropsType = {
     _state: {
         profilePage: {
@@ -70,38 +92,26 @@ let store: StorePropsType = {
                 {id: 2, text: "Hello"},
                 {id: 3, text: "How are you?"},
                 {id: 4, text: "Yo"},
-            ]
+            ],
+            newMessageBody: ""
         }
     },
     getState() {
         return this._state;
     },
     _callSubscriber() {
-
     },
     rerenderEntireTree() {
-
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: new Date().getDate(),
-                // text: this._state.profilePage.newPostText,
-                text: action.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.unshift(newPost)
-            this._state.profilePage.newPostText = ""
-            this._callSubscriber(this._state)
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
+        this._callSubscriber(this._state)
 
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state)
-        }},
+    },
     subscribe(callback) {
         this._callSubscriber = callback
     }
-
 }
 
 export default store;

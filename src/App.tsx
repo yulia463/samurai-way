@@ -18,13 +18,12 @@ import {
 } from "./redux/State";
 
 export type AppPropsType = {
-    store:StorePropsType
-
+    store: StorePropsType
     dispatch: (action: ActionsTypes) => void
 
 }
 
-function App (props:AppPropsType) {
+function App(props: AppPropsType) {
     const state = props.store.getState()
     return (
         <BrowserRouter>
@@ -35,15 +34,19 @@ function App (props:AppPropsType) {
                     <NavBar/>
 
                     <div className={'content'}>
-                        <Route path={"/dialogs"}
-                               render={() => <Dialogs
-                                   dialogsData={state.dialogPage.dialogsData}
-                                   messagesData={state.dialogPage.messagesData}
-                               />}/>
+                        <Route
+                            path={"/dialogs"}
+                            render={() => <Dialogs
+                                dialogsData={state.dialogPage.dialogsData}
+                                messagesData={state.dialogPage.messagesData}
+                                newMessageBody={state.dialogPage.newMessageBody}
+                                dispatch={props.dispatch}
+                            />}/>
                         <Route path={"/profile"}
-                               render={() => <Profile newPostText={state.profilePage.newPostText}
-                                                      dispatch={props.dispatch}
-                                                      profilePage={state.profilePage.posts}/>}/>
+                               render={() => <Profile
+                                   newPostText={state.profilePage.newPostText}
+                                   dispatch={props.dispatch}
+                                   profilePage={state.profilePage.posts}/>}/>
                         <Route path={"/news"} render={() => <News/>}/>
                         <Route path={"/music"} render={() => <Music/>}/>
                         <Route path={"/settings"} render={() => <Settings/>}/>
