@@ -44,6 +44,7 @@ export type StorePropsType = {
     dispatch: (action: ActionsTypes) => void
 
 }
+
 export const addPostAC = (postText: string) => {
     return {
         type: 'ADD-POST',

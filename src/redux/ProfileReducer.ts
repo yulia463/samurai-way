@@ -1,7 +1,16 @@
 import {ActionsTypes, ProfilePagesType, StoreType} from "./State";
 
 
-export const profileReducer = (state: ProfilePagesType, action: ActionsTypes): ProfilePagesType => {
+ let initialState = {
+    posts: [
+        {id: 1, text: "how do you like my social network?", likesCount: 7},
+        {id: 2, text: "have questions ? ", likesCount: 48},
+        {id: 3, text: " ask them on my LinkedIn", likesCount: 0}
+    ],
+    newPostText: ""
+};
+
+export const profileReducer = (state: ProfilePagesType = initialState, action: ActionsTypes): ProfilePagesType => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {
@@ -16,6 +25,7 @@ export const profileReducer = (state: ProfilePagesType, action: ActionsTypes): P
         case 'UPDATE-NEW-POST-TEXT':
             state.newPostText = action.newText
             break;
+        default: return state
     }
     return state
-}
+};

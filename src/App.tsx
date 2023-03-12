@@ -16,14 +16,17 @@ import {
     StorePropsType,
     StoreType,
 } from "./redux/State";
+import {dialogsReducer} from "./redux/DialogsReducer";
+import {profileReducer} from "./redux/ProfileReducer";
 
 export type AppPropsType = {
-    store: StorePropsType
+    store: any
     dispatch: (action: ActionsTypes) => void
 
 }
 
 function App(props: AppPropsType) {
+    // console.log('props.', props.store.getState())
     const state = props.store.getState()
     return (
         <BrowserRouter>
@@ -37,16 +40,16 @@ function App(props: AppPropsType) {
                         <Route
                             path={"/dialogs"}
                             render={() => <Dialogs
-                                dialogsData={state.dialogPage.dialogsData}
-                                messagesData={state.dialogPage.messagesData}
-                                newMessageBody={state.dialogPage.newMessageBody}
+                                dialogsData={state.dialogsReducer.dialogsData}
+                                messagesData={state.dialogsReducer.messagesData}
+                                newMessageBody={state.dialogsReducer.newMessageBody}
                                 dispatch={props.dispatch}
                             />}/>
                         <Route path={"/profile"}
                                render={() => <Profile
-                                   newPostText={state.profilePage.newPostText}
+                                   newPostText={state.profileReducer.newPostText}
                                    dispatch={props.dispatch}
-                                   profilePage={state.profilePage.posts}/>}/>
+                                   profilePage={state.profileReducer.posts}/>}/>
                         <Route path={"/news"} render={() => <News/>}/>
                         <Route path={"/music"} render={() => <Music/>}/>
                         <Route path={"/settings"} render={() => <Settings/>}/>
