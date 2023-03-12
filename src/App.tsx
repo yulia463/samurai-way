@@ -8,6 +8,8 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Header} from "./components/Header/Header";
+import {dialogsReducer} from "./redux/DialogsReducer";
+import {profileReducer} from "./redux/ProfileReducer";
 import {
     ActionsTypes,
     DialogsDataType,
@@ -16,8 +18,7 @@ import {
     StorePropsType,
     StoreType,
 } from "./redux/State";
-import {dialogsReducer} from "./redux/DialogsReducer";
-import {profileReducer} from "./redux/ProfileReducer";
+
 
 export type AppPropsType = {
     store: any
