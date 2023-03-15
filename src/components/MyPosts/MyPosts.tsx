@@ -1,14 +1,14 @@
 import React, {ChangeEvent, useState,KeyboardEvent} from "react";
 import styles from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsTypes, addPostAC, PostDataType, updateNewTextAC} from "../../redux/State";
+import { PostDataType} from "../../redux/State";
 
 
 export type MyPostsPropsType = {
     profilePage: Array<PostDataType>
     newPostText:string
-    dispatch: (action: ActionsTypes) => void
-
+    addPost: () => void;
+    updateNewPostText: (text: string) => void;
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -16,10 +16,12 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.profilePage.map(el => <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
 
     const addPost = () => {
-        props.dispatch(addPostAC(props.newPostText))
+        props.addPost()
+     //  props.dispatch(addPostAC(props.newPostText))
+
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewTextAC(e.currentTarget.value))
+        props.updateNewPostText(e.currentTarget.value)
     }
     const onEnterClick=(e:KeyboardEvent<HTMLTextAreaElement>)=>{
         if (e.key === "Enter"){

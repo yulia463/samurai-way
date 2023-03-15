@@ -8,8 +8,6 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Header} from "./components/Header/Header";
-import {dialogsReducer} from "./redux/DialogsReducer";
-import {profileReducer} from "./redux/ProfileReducer";
 import {
     ActionsTypes,
     DialogsDataType,
@@ -27,7 +25,6 @@ export type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
-    // console.log('props.', props.store.getState())
     const state = props.store.getState()
     return (
         <BrowserRouter>

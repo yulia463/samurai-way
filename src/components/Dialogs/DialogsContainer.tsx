@@ -4,7 +4,6 @@ import {DialogItem} from "./DialogItem";
 import {Message} from "./Message";
 import {ActionsTypes, DialogsDataType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/State";
 
-
 type DialogsPropsType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
