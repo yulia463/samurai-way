@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import {NavBar} from "./components/Nav/NavBar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
@@ -16,6 +15,7 @@ import {
     StorePropsType,
     StoreType,
 } from "./redux/State";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 export type AppPropsType = {
@@ -37,11 +37,12 @@ function App(props: AppPropsType) {
                     <div className={'content'}>
                         <Route
                             path={"/dialogs"}
-                            render={() => <Dialogs
+                            render={() => <DialogsContainer
                                 dialogsData={state.dialogsReducer.dialogsData}
                                 messagesData={state.dialogsReducer.messagesData}
                                 newMessageBody={state.dialogsReducer.newMessageBody}
                                 dispatch={props.dispatch}
+                                updateNewMessageText={props.store.updateNewMessageText}
                             />}/>
                         <Route path={"/profile"}
                                render={() => <Profile
