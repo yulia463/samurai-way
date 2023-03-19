@@ -7,25 +7,12 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Header} from "./components/Header/Header";
-import {
-    ActionsTypes,
-    DialogsDataType,
-    MessagesDataType,
-    PostDataType,
-    StorePropsType,
-    StoreType,
-} from "./redux/State";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-
 export type AppPropsType = {
-    store: any
-    dispatch: (action: ActionsTypes) => void
-
 }
 
 function App(props: AppPropsType) {
-    const state = props.store.getState()
     return (
         <BrowserRouter>
 
@@ -38,17 +25,10 @@ function App(props: AppPropsType) {
                         <Route
                             path={"/dialogs"}
                             render={() => <DialogsContainer
-                                dialogsData={state.dialogsReducer.dialogsData}
-                                messagesData={state.dialogsReducer.messagesData}
-                                newMessageBody={state.dialogsReducer.newMessageBody}
-                                dispatch={props.dispatch}
-                                updateNewMessageText={props.store.updateNewMessageText}
                             />}/>
                         <Route path={"/profile"}
-                               render={() => <Profile
-                                   newPostText={state.profileReducer.newPostText}
-                                   dispatch={props.dispatch}
-                                   profilePage={state.profileReducer.posts}/>}/>
+                               render={() => <Profile  />}
+                        />
                         <Route path={"/news"} render={() => <News/>}/>
                         <Route path={"/music"} render={() => <Music/>}/>
                         <Route path={"/settings"} render={() => <Settings/>}/>

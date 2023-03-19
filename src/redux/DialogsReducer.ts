@@ -1,5 +1,25 @@
-import {ActionsTypes, DialogsPagesType, StoreType} from "./State";
+import {ActionsTypes} from "./ActionsType";
 
+export type MessagesDataType = {
+    id: number
+    text: string
+}
+export type DialogsDataType = {
+    id: number
+    name: string
+}
+export type PostDataType = {
+    id: number,
+    text: string,
+    likesCount: number
+}
+
+export type DialogsPagesType = {
+    dialogsData: Array<DialogsDataType>,
+    messagesData: Array<MessagesDataType>
+    newMessageBody: string
+
+}
 
  let initialState ={
     dialogsData: [
@@ -18,17 +38,23 @@ import {ActionsTypes, DialogsPagesType, StoreType} from "./State";
     ],
     newMessageBody: ""
 }
-export const dialogsReducer = (state: DialogsPagesType = initialState, action: ActionsTypes): DialogsPagesType => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes): DialogsPagesType => {
     switch (action.type) {
         case 'UPDATE_NEW_MESSAGE_BODY':
             state.newMessageBody = action.body;
-            break;
+           return state
         case 'SEND_MESSAGE':
             let body = state.newMessageBody;
             state.messagesData.push({id: 5, text: body})
             state.newMessageBody = '';
-            break;
+           return state
         default: return state;
     }
     return state
 }
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: 'UPDATE_NEW_MESSAGE_BODY',
+        body: body
+    } as const
+};

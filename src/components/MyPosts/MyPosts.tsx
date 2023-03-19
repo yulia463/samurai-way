@@ -1,31 +1,30 @@
 import React, {ChangeEvent,KeyboardEvent} from "react";
 import styles from './MyPosts.module.css'
 import Post from "./Post/Post";
-import { PostDataType} from "../../redux/State";
-
+import {PostDataType} from "../../redux/DialogsReducer";
 
 export type MyPostsPropsType = {
-    profilePage: Array<PostDataType>
+    posts: Array<PostDataType>
     newPostText:string
     addPost: () => void;
-    updateNewPostText: (text: string) => void;
+    updateTextPost: (text: string) => void;
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElements = props.profilePage.map(el => <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
+    let postsElements = props.posts.map(el => <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
 
-    const addPost = () => {
+    const addPostHandler = () => {
         props.addPost()
      //  props.dispatch(addPostAC(props.newPostText))
 
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        props.updateTextPost(e.currentTarget.value)
     }
     const onEnterClick=(e:KeyboardEvent<HTMLTextAreaElement>)=>{
         if (e.key === "Enter"){
-            addPost()
+            addPostHandler()
         }
     }
     return (
@@ -41,7 +40,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 </div>
 
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={addPostHandler}>Add post</button>
                 </div>
             </div>
 

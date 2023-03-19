@@ -8,4 +8,5 @@ let reducers = combineReducers({
     dialogsReducer
 });
 let store = createStore(reducers);
+export type storeType = typeof store
 export default store;
