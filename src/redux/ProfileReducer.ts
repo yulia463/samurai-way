@@ -9,44 +9,51 @@ let initialState = {
     ],
     newPostText: ""
 };
- export type ProfilePagesType = {
-     posts: Array<PostDataType>
-     newPostText: string
- }
+export type ProfilePagesType = {
+    posts: Array<PostDataType>
+    newPostText: string
+};
 
 export const addPostAC = () => {
     return {
         type: 'ADD-POST'
     } as const
 };
+
+
 export const profileReducer = (state: ProfilePagesType = initialState, action: ActionsTypes): ProfilePagesType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case 'ADD-POST': {
             let newPost = {
                 id: new Date().getDate(),
-                // text: this._state.profilePage.newPostText,
                 text: state.newPostText,
                 likesCount: 0
             };
-            state.posts.push(newPost)
-            state.newPostText = ""
-           return state
-        case 'UPDATE-NEW-POST-TEXT':
-            state.newPostText = action.newText
-          return state
-        default: return state
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts.push(newPost);
+            stateCopy.newPostText = "";
+            return stateCopy;
+        }
+        case 'UPDATE-NEW-POST-TEXT': {
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }
+        default:
+            return state;
     }
-    return state
+    return state;
 };
- export const sendMessageAC = () => {
-     return {
-         type: 'SEND_MESSAGE'
-     } as const
- };
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND_MESSAGE'
+    } as const
+};
 
- export const updateNewTextAC = (postText: string) => {
-     return {
-         type: 'UPDATE-NEW-POST-TEXT',
-         newText: postText
-     } as const
- };
+export const updateNewTextAC = (postText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: postText
+    } as const
+};

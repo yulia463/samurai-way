@@ -7,7 +7,8 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Header} from "./components/Header/Header";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
 
 export type AppPropsType = {
 }
@@ -24,7 +25,7 @@ function App(props: AppPropsType) {
                     <div className={'content'}>
                         <Route
                             path={"/dialogs"}
-                            render={() => <DialogsContainer
+                            render={() => <DialogsContainer newMessageBody={} messagesData={}
                             />}/>
                         <Route path={"/profile"}
                                render={() => <Profile  />}

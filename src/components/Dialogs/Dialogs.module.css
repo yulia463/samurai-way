@@ -5,22 +5,23 @@
 
 }
 
-.dialogsItem .active{
+.dialogsItem .active {
 
-    color :snow;
+    color: snow;
 }
+
 .dialogsItem {
     padding: 10px;
 }
 
 .dialog {
-padding: 6px;
+    padding: 6px;
 }
 
 .messages {
-padding: 10px;
+    padding: 10px;
 }
 
 .message {
-padding: 6px;
+    padding: 6px;
 }

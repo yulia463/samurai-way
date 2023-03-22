@@ -3,10 +3,15 @@ import {profileReducer} from "./ProfileReducer";
 import {dialogsReducer} from "./DialogsReducer";
 
 
-let reducers = combineReducers({
+export let rootReducer = combineReducers({
     profileReducer,
     dialogsReducer
 });
-let store = createStore(reducers);
+
 export type storeType = typeof store
+export type AppStateType = ReturnType<typeof rootReducer>
+
+let store = createStore(rootReducer);
+
+//window.store = store;
 export default store;

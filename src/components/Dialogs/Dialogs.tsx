@@ -7,7 +7,7 @@ import {DialogsDataType} from "../../redux/DialogsReducer";
 type DialogsPropsType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    newMessageBody:  string
+    newMessageBody: string
     addMessage: () => void;
     updateNewMessageText: (text: string) => void;
 }
