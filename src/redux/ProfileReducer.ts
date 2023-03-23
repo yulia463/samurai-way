@@ -1,27 +1,22 @@
 import {PostDataType} from "./DialogsReducer";
 import {ActionsTypes} from "./ActionsType";
 
+export type InitialStateProfileType = typeof initialState;
+
 let initialState = {
     posts: [
         {id: 1, text: "how do you like my social network?", likesCount: 7},
         {id: 2, text: "have questions ? ", likesCount: 48},
         {id: 3, text: " ask them on my LinkedIn", likesCount: 0}
-    ],
+    ] as Array<PostDataType>,
     newPostText: ""
 };
-export type ProfilePagesType = {
-    posts: Array<PostDataType>
-    newPostText: string
-};
-
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-};
 
 
-export const profileReducer = (state: ProfilePagesType = initialState, action: ActionsTypes): ProfilePagesType => {
+
+
+
+export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionsTypes): InitialStateProfileType => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {
@@ -43,7 +38,6 @@ export const profileReducer = (state: ProfilePagesType = initialState, action: A
         default:
             return state;
     }
-    return state;
 };
 export const sendMessageAC = () => {
     return {
@@ -55,5 +49,10 @@ export const updateNewTextAC = (postText: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newText: postText
+    } as const
+};
+export const addPostAC = () => {
+    return {
+        type: 'ADD-POST'
     } as const
 };

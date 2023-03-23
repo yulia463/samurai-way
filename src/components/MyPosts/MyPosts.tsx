@@ -1,18 +1,14 @@
 import React, {ChangeEvent,KeyboardEvent} from "react";
 import styles from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostDataType} from "../../redux/DialogsReducer";
 
-export type MyPostsPropsType = {
-    posts: Array<PostDataType>
-    newPostText:string
-    addPost: () => void;
-    updateTextPost: (text: string) => void;
-}
+import {MyPostsPropsType} from "./Post/MyPostContainer";
+
+
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElements = props.posts.map(el => <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
+    let postsElements = props.profileState.posts.map(el => <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
 
     const addPostHandler = () => {
         props.addPost()
@@ -34,7 +30,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 <div>
                     <textarea
                         onKeyDown={onEnterClick}
-                        value={props.newPostText}
+                        value={props.profileState.newPostText}
                         onChange={onChangeHandler}
                     />
                 </div>
