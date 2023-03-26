@@ -17,12 +17,12 @@ type MapDispatchToPropsType = {
 
 export type MyPostsPropsType = MapDispatchToPropsType & MapStateToPropsType;
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+export let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profileState: state.profileReducer
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+export let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addPost: () => {
             dispatch(addPostAC())

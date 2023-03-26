@@ -1,0 +1,21 @@
+.userCard{
+    display: flex;
+    flex-direction: row;
+    border: 1px dotted #000000;
+}
+.userPhoto{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+
+}
+.buttonFollow{
+  display: flex;
+    height: 25px;
+   justify-content: center;
+    border-radius: 4px;
+}
+.nameAndStatus{
+    display: flex;
+}
