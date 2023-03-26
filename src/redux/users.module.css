@@ -1,7 +1,7 @@
 .userCard{
     display: flex;
     flex-direction: row;
-    border: 1px dotted #000000;
+    border: 1px dotted #bae6ee;
 }
 .userPhoto{
     width: 50px;
