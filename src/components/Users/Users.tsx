@@ -3,17 +3,42 @@ import styles from '../../redux/users.module.css'
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 
-class Users extends React.Component<UsersPropsType,any> {
-    componentDidMount(){
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+class Users extends React.Component<UsersPropsType, any> {
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage} &count=${this.props.usersPage.pageSize}`)
+            .then(response => {
 
-            this.props.setUsers(response.data.items)
-        });
+                this.props.setUsers(response.data.items)
+            });
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        // @ts-ignore
+        this.props.usersPage.currentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber} &count=${this.props.usersPage.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalUsersCount);
+            });
     }
 
     render() {
+        let pagesCount = Math.ceil(this.props.usersPage.totalUsersCount / this.props.usersPage.pageSize);
+        const pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
         return (<div>
+                <div>
+                    {pages.map((el) => {
+                        return <span
+                            className={this.props.usersPage.currentPage === el ? styles.selectedPage : ""}
+                            onClick={(e) => {
+                                this.onPageChanged(el)
+                            }}>{el}</span>
+                    })}
 
+                </div>
                 <div>
                     {this.props.usersPage.users.map(u => <div className={styles.userCard} key={u.id}>
                         <img alt={'photo not found'}
@@ -40,6 +65,5 @@ class Users extends React.Component<UsersPropsType,any> {
         )
     }
 }
-export default Users;
 
-//  <button onClick={this.getUsers}>Get users</button>
+export default Users;

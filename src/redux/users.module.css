@@ -19,3 +19,6 @@
 .nameAndStatus{
     display: flex;
 }
+.selectedPage{
+    font-weight: bold;
+}
