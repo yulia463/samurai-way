@@ -25,7 +25,7 @@ export type UserLocationType = {
     country: string
 }
 
-let initialState: InitialStateType = {
+export let initialState: InitialStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
@@ -76,6 +76,9 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
         case ActionTypeT.SET_CURRENT_PAGE : {
             return {...state,currentPage:action.currentPage}
         }
+        case ActionTypeT.SET_USERS_TOTAL_COUNT : {
+            return  {...state , totalUsersCount: action.totalUsersCount }
+        }
 
         default:
             return state;
@@ -123,4 +126,4 @@ export const followAC = (userID: number) => ({type: ActionTypeT.FOLLOW, userID} 
 export const unFollowAC = (userID: number) => ({type: ActionTypeT.UNFOLLOW, userID} as const)
 export const setUsersAC = (users: Array<UserType>) => ({type: ActionTypeT.SET_USERS, users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: ActionTypeT.SET_CURRENT_PAGE, currentPage} as const)
-export const setTotalUsersCountAC = (totalCount: number) => ({type: ActionTypeT.SET_USERS_TOTAL_COUNT, totalCount} as const)
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: ActionTypeT.SET_USERS_TOTAL_COUNT, totalUsersCount} as const)
