@@ -10,8 +10,7 @@ import {Header} from "./components/Header/Header";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 
-export type AppPropsType = {
-}
+export type AppPropsType = {}
 
 function App(props: AppPropsType) {
     return (
@@ -27,7 +26,7 @@ function App(props: AppPropsType) {
                             path={"/dialogs"}
                             render={() => <DialogsContainer/>}/>
                         <Route path={"/profile"}
-                               render={() => <Profile  />}
+                               render={() => <Profile/>}
                         />
                         <Route path={"/news"} render={() => <News/>}/>
                         <Route path={"/music"} render={() => <Music/>}/>

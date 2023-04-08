@@ -9,10 +9,10 @@ type UsersType = {
     currentPage: number
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    onPageChanged:(pageNumber: number)=>void
+    onPageChanged: (pageNumber: number) => void
 }
 export const Users = (props: UsersType) => {
-     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -23,9 +23,7 @@ export const Users = (props: UsersType) => {
                 {pages.map((el) => {
                     return <span
                         className={props.currentPage === el ? styles.selectedPage : ""}
-                        onClick={(e) => {
-                            props.onPageChanged(el)
-                        }}>{el}</span>
+                        onClick={(e) => {props.onPageChanged(el)}}>{el}</span>
                 })}
 
             </div>
@@ -36,12 +34,8 @@ export const Users = (props: UsersType) => {
                          className={styles.userPhoto}/>
                     <div className={styles.buttonFollow}>
                         {u.followed
-                            ? <button onClick={() => {
-                                props.follow(u.id)
-                            }}>Unfollow</button>
-                            : <button onClick={() => {
-                                props.unfollow(u.id)
-                            }}>Follow</button>}
+                            ? <button onClick={() => {props.follow(u.id)}}>Unfollow</button>
+                            : <button onClick={() => {props.unfollow(u.id)}}>Follow</button>}
 
                     </div>
                     <span className={styles.nameAndStatus}>
