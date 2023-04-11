@@ -3,7 +3,6 @@ import MyPosts from "../MyPosts";
 import {addPostAC, InitialStateProfileType, updateNewTextAC} from "../../../redux/ProfileReducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/Redux-store";
-import {ProfilePropsType} from "../../Profile/Profile";
 import {Dispatch} from "redux";
 
 

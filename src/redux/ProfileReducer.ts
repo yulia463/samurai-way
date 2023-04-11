@@ -9,12 +9,9 @@ let initialState = {
         {id: 2, text: "have questions ? ", likesCount: 48},
         {id: 3, text: " ask them on my LinkedIn", likesCount: 0}
     ] as Array<PostDataType>,
-    newPostText: ""
+    newPostText: "",
+    profile: null
 };
-
-
-
-
 
 export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionsTypes): InitialStateProfileType => {
     switch (action.type) {
@@ -35,6 +32,9 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
             stateCopy.newPostText = action.newText;
             return stateCopy;
         }
+        case 'SET-USER-PROFILE': {
+            return {...state, profile: action.profile};
+        }
         default:
             return state;
     }
@@ -54,5 +54,11 @@ export const updateNewTextAC = (postText: string) => {
 export const addPostAC = () => {
     return {
         type: 'ADD-POST'
+    } as const
+};
+export const setUserProfileAC = (profile: any) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        profile
     } as const
 };

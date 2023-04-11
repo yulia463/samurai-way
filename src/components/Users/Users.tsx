@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../redux/users.module.css";
 import {UserType} from "../../redux/UsersReducer";
+import {NavLink} from 'react-router-dom';
 
 type UsersType = {
     users: Array<UserType>
@@ -23,19 +24,27 @@ export const Users = (props: UsersType) => {
                 {pages.map((el) => {
                     return <span
                         className={props.currentPage === el ? styles.selectedPage : ""}
-                        onClick={(e) => {props.onPageChanged(el)}}>{el}</span>
+                        onClick={(e) => {
+                            props.onPageChanged(el)
+                        }}>{el}</span>
                 })}
 
             </div>
             <div>
                 {props.users?.map((u: any) => <div className={styles.userCard} key={u.id}>
-                    <img alt={'photo not found'}
-                         src={u.photos.small !== null ? u.photos.small : 'https://abrakadabra.fun/uploads/posts/2021-12/1638968482_1-abrakadabra-fun-p-grustnii-pepe-1.png'}
-                         className={styles.userPhoto}/>
+                    <NavLink to={`/profile/${u.id}`}>
+                        <img alt={'photo not found'}
+                             src={u.photos.small !== null ? u.photos.small : 'https://abrakadabra.fun/uploads/posts/2021-12/1638968482_1-abrakadabra-fun-p-grustnii-pepe-1.png'}
+                             className={styles.userPhoto}/>
+                    </NavLink>
                     <div className={styles.buttonFollow}>
                         {u.followed
-                            ? <button onClick={() => {props.follow(u.id)}}>Unfollow</button>
-                            : <button onClick={() => {props.unfollow(u.id)}}>Follow</button>}
+                            ? <button onClick={() => {
+                                props.follow(u.id)
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                props.unfollow(u.id)
+                            }}>Follow</button>}
 
                     </div>
                     <span className={styles.nameAndStatus}>

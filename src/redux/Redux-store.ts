@@ -16,3 +16,18 @@ export type AppStateType = ReturnType<typeof rootReducer>
 let store = createStore(rootReducer);
 
 export default store;
+
+const _store = {
+    state: {
+        profileReducer: {
+            posts: [],
+            newPostText: '',
+            profile: {}
+        },
+        dialogsReducer: {},
+        usersPage: {}
+    },
+    subscriber: () => {},
+    dispatch: () => {}
+    //....
+}

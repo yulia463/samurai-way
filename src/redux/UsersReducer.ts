@@ -1,10 +1,3 @@
-// const FOLLOW = 'FOLLOW';
-// const UNFOLLOW = 'UNFOLLOW';
-// const SET_USERS = 'SET_USERS';
-export type UserLocationType = {
-    city: string,
-    country: string
-}
 const enum ActionTypeT {
     FOLLOW = 'FOLLOW hello wo',
     UNFOLLOW = 'UNFOLLOW',

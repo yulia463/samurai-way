@@ -22,14 +22,10 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        updateNewMessageText: (text: string) => {
-            dispatch(updateNewMessageBodyAC(text))
-        },
-        addMessage: () => {
-            dispatch(sendMessageAC())
-        }
+        updateNewMessageText: (messageText: string) => dispatch(updateNewMessageBodyAC(messageText)),
+        addMessage: () => dispatch(sendMessageAC())
+
     }
 }
-//const DialogsContainer = connect<MapStateToPropsType, DispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(Dialogs);
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
