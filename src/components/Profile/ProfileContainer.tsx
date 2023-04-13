@@ -6,7 +6,6 @@ import {setUserProfileAC} from "../../redux/ProfileReducer";
 import {AppStateType} from "../../redux/Redux-store";
 import {withRouter} from "react-router-dom";
 
-
 class ProfileContainer extends React.Component<any, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId;

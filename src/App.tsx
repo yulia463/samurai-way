@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import {NavBar} from "./components/Nav/NavBar";
-import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
