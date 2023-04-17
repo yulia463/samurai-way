@@ -1,68 +1,36 @@
 const enum ActionTypeT {
-    FOLLOW = 'FOLLOW',
-    UNFOLLOW = 'UNFOLLOW',
-}
-export type UserType = {
-    id: number,
-    name: string,
-    followed: boolean,
-    status: string,
-    photos: {
-        small: string,
-        large: string
-    }
+    SET_USER_DATA = 'SET_USER_DATA',
 }
 
 export let initialState: InitialStateType = {
-    users: [],
-    pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 1,
-    isFetching :true
+    userId: null,
+    login: null,
 }
-export type InitialStateType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching :boolean
-}
+export type InitialStateType = {}
 export type ActionType =
-    ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
-
-
+    ReturnType<typeof setUserDataAC>
 
 
 export const AuthReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case ActionTypeT.FOLLOW : {
+        case ActionTypeT.SET_USER_DATA : {
             return {
                 ...state,
-                users: state.users.map((u: UserType) => {
-                    if (u.id === action.userID) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
-            }
+                ...action.data
+            };
         }
-        case ActionTypeT.UNFOLLOW : {
-            return {
-                ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userID) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
-            }
-        }
-
-
         default:
             return state;
     }
 };
-export const follow = (userID: number) => ({type: ActionTypeT.FOLLOW, userID} as const)
-export const unfollow = (userID: number) => ({type: ActionTypeT.UNFOLLOW, userID} as const)
+
+export const setUserDataAC = (userID: number, email: any, login: string) => ({
+    type: ActionTypeT.SET_USER_DATA,
+    data: {
+        userID,
+        email,
+        login
+    }
+
+} as const)
+

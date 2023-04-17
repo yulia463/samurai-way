@@ -22,3 +22,6 @@ header img {
     width: 80%;
     background-color: #4eaca3;
 }
+.loginBlock{
+    float: right;
+}
