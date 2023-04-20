@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../redux/users.module.css";
 import {UserType} from "../../redux/UsersReducer";
 import {NavLink} from 'react-router-dom';
+import axios from "axios";
 
 type UsersType = {
     users: Array<UserType>
@@ -12,6 +13,7 @@ type UsersType = {
     unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
 }
+
 export const Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const pages = [];
@@ -40,11 +42,36 @@ export const Users = (props: UsersType) => {
                     <div className={styles.buttonFollow}>
                         {u.followed
                             ? <button onClick={() => {
-                                props.follow(u.id)
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow?page=${u.id}`, {
+                                    withCredentials: true,
+                                    headers: {
+                                        "API-KEY": "8c1e219f-9ff2-4bd6-a600-b07406352fbd"
+                                    }
+                                })
+                                    .then(response => {
+                                        if (response.data.resultCode == 0) {
+                                            props.unfollow(u.id);
+                                        }
+                                    });
+
                             }}>Unfollow</button>
+
                             : <button onClick={() => {
-                                props.unfollow(u.id)
+
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow?page=${u.id}`, {}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        "API-KEY": "8c1e219f-9ff2-4bd6-a600-b07406352fbd"
+                                    }
+                                })
+                                    .then(response => {
+                                        if (response.data.resultCode == 0) {
+                                            props.follow(u.id);
+                                        }
+                                    });
+
                             }}>Follow</button>}
+
 
                     </div>
                     <span className={styles.nameAndStatus}>
