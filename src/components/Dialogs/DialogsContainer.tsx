@@ -1,6 +1,6 @@
 import React from "react";
 import {Dialogs} from "./Dialogs";
-import {DialogsDataType, DialogsPagesType, MessagesDataType, updateNewMessageBodyAC} from "../../redux/DialogsReducer";
+import { DialogsPagesType,  updateNewMessageBodyAC} from "../../redux/DialogsReducer";
 import {connect} from "react-redux";
 import {sendMessageAC} from "../../redux/ProfileReducer";
 import {AppStateType} from "../../redux/Redux-store";
