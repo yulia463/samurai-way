@@ -5,11 +5,10 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetchingAC, unfollow,
+    toggleIsFetchingAC, toggleIsFollowingProgressAC, unfollow,
     UserType
 } from "../../redux/UsersReducer";
 import {AppStateType} from "../../redux/Redux-store";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {usersAPI} from "../../Api/Api";
@@ -21,6 +20,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    toggleIsFollowingProgressAC:(isFetching: boolean)=>void
 }
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -30,7 +30,8 @@ type MapDispatchToPropsType = {
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetchingAC: (isFetching: boolean) => void
+    followingInProgress: (isFetching: boolean) => void
+
 }
 export const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -38,7 +39,8 @@ export const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 
 }
@@ -75,7 +77,7 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
                        unfollow={this.props.unfollow}
                        follow={this.props.follow}
                        totalUsersCount={this.props.totalUsersCount}
-
+                       followingInProgress={this.props.followingInProgress}
                 />
             </>
 
@@ -85,5 +87,8 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
 
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetchingAC,})(UsersContainer);
+    {
+        follow, unfollow, setUsers, setCurrentPage,
+        setTotalUsersCount, toggleIsFetchingAC, toggleIsFollowingProgressAC
+    })(UsersContainer);
 

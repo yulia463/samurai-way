@@ -5,6 +5,7 @@ const enum ActionTypeT {
     SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
     SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT',
     TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
+    TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS',
 }
 export type UserType = {
     id: number,
@@ -22,7 +23,8 @@ export let initialState: InitialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching :true
+    isFetching :true,
+    followingInProgress:false
 }
 export type InitialStateType = {
     users: Array<UserType>
@@ -30,6 +32,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching :boolean
+    followingInProgress:boolean
 }
 export type ActionType =
     ReturnType<typeof follow>
@@ -38,6 +41,7 @@ export type ActionType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof toggleIsFollowingProgressAC>
 
 
 
@@ -77,6 +81,9 @@ export const usersReducer = (state = initialState, action: ActionType): InitialS
         case ActionTypeT.TOGGLE_IS_FETCHING : {
             return  {...state , isFetching: action.isFetching }
         }
+        case ActionTypeT.TOGGLE_IS_FOLLOWING_PROGRESS : {
+            return {...state,followingInProgress:action.isFetching}
+        }
 
         default:
             return state;
@@ -88,3 +95,4 @@ export const setUsers = (users: Array<UserType>) => ({type: ActionTypeT.SET_USER
 export const setCurrentPage = (currentPage: number) => ({type: ActionTypeT.SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: ActionTypeT.SET_USERS_TOTAL_COUNT, totalUsersCount} as const)
 export const toggleIsFetchingAC = (isFetching: boolean) => ({type: ActionTypeT.TOGGLE_IS_FETCHING, isFetching} as const)
+export const toggleIsFollowingProgressAC = (isFetching: boolean) => ({type: ActionTypeT.TOGGLE_IS_FOLLOWING_PROGRESS, isFetching} as const)

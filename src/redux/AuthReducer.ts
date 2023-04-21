@@ -3,13 +3,13 @@ const enum ActionTypeT {
 }
 
 export let initialState: InitialStateType = {
-    userId: null,
+    id: null,
     login: null,
     email: null,
     isAuth: false
 }
 export type InitialStateType = {
-    userId: string | null,
+    id: string | null,
     login: string | null,
     email: string | null,
     isAuth: boolean
@@ -21,6 +21,7 @@ export type ActionType =
 export const AuthReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case ActionTypeT.SET_USER_DATA : {
+            debugger
             return {
                 ...state,
                 ...action.data,
@@ -32,10 +33,10 @@ export const AuthReducer = (state = initialState, action: ActionType): InitialSt
     }
 };
 
-export const setAuthUserDataAC = (userID: number, email: string, login: string) => ({
+export const setAuthUserDataAC = (id: string, email: string, login: string) => ({
     type: ActionTypeT.SET_USER_DATA,
     data: {
-        userID,
+        id,
         email,
         login
     }

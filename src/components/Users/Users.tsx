@@ -41,7 +41,10 @@ export const Users = (props: UsersType) => {
                     </NavLink>
                     <div className={styles.buttonFollow}>
                         {u.followed
-                            ? <button onClick={() => {
+                            ? <button
+                               // disabled={props.followingInProgress}
+                                onClick={() => {
+                              //  props.followingInProgress(true)
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow?page=${u.id}`, {
                                     withCredentials: true,
                                     headers: {
@@ -52,12 +55,15 @@ export const Users = (props: UsersType) => {
                                         if (response.data.resultCode == 0) {
                                             props.unfollow(u.id);
                                         }
+                                    //    props.followingInProgress(false)
                                     });
 
                             }}>Unfollow</button>
 
-                            : <button onClick={() => {
-
+                            : <button
+                               // disabled={props.followingInProgress}
+                                onClick={() => {
+                              //  props.followingInProgress(true)
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow?page=${u.id}`, {}, {
                                     withCredentials: true,
                                     headers: {
@@ -68,6 +74,7 @@ export const Users = (props: UsersType) => {
                                         if (response.data.resultCode == 0) {
                                             props.follow(u.id);
                                         }
+                                       // props.followingInProgress(false)
                                     });
 
                             }}>Follow</button>}

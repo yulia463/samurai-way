@@ -7,25 +7,27 @@ import {setAuthUserDataAC} from "../../redux/AuthReducer";
 import {UserType} from "../../redux/UsersReducer";
 import {DialogsPagesType} from "../../redux/DialogsReducer";
 
-// export class HeaderContainer extends React.Component<AuthUserPropsType, {}> {
-//     componentDidMount() {
-//
-//         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-//             withCredentials: true
-//         })
-//             .then(response => {
-//                 if (response.data.resultCode === 0) {
-//                     let {id, login, email} = response.data
-//                     this.props.setAuthUserDataAC(id, email, login);
-//                 }
-//             });
-//     }
-//
-//     render() {
-//         return <Header {...this.props}/>
-//     }
-//
-// }
+
+export type HeaderPropsType = ReturnType<typeof mapStateToProps> & ReturnType<typeof setAuthUserDataAC>
+export class HeaderContainer extends React.Component<any, any> {
+    componentDidMount() {
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+            withCredentials: true
+        })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    let {email, id, login} = response.data.data
+                    this.props.setAuthUserDataAC(id, email, login);
+                }
+            });
+    }
+
+    render() {
+        return <Header login={this.props.login} isAuth={this.props.isAuth}/>
+    }
+
+}
 
 export type MapStateToPropsType = {
     login: string | null;
@@ -40,10 +42,11 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 export type AuthUserPropsType = MapStateToPropsType & MapDispatchToPropsType
+
 type MapDispatchToPropsType = {
-    setAuthUserDataAC: (userID: number, email: string, login: string) => void
+    setAuthUserDataAC: (id: number, email: string, login: string) => void
 }
 
-export const HeaderContainer = connect(mapStateToProps, {setAuthUserDataAC})(Header);
-
+//export const HeaderContainer = connect(mapStateToProps, {setAuthUserDataAC})(Header);
+export default connect(mapStateToProps, {setAuthUserDataAC})(HeaderContainer)
 //{...this.props}

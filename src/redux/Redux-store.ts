@@ -4,7 +4,6 @@ import {dialogsReducer} from "./DialogsReducer";
 import {usersReducer} from "./UsersReducer";
 import {AuthReducer} from "./AuthReducer";
 
-
 export let rootReducer = combineReducers({
     profileReducer,
     dialogsReducer,
@@ -12,26 +11,9 @@ export let rootReducer = combineReducers({
     auth: AuthReducer
 });
 
-//export type storeType = typeof store
 export type AppStateType = ReturnType<typeof rootReducer>
 
 let store = createStore(rootReducer);
 
 export default store;
 
-const _store = {
-    state: {
-        profileReducer: {
-            posts: [],
-            newPostText: '',
-            profile: {}
-        },
-        dialogsReducer: {},
-        usersPage: {}
-    },
-    subscriber: () => {
-    },
-    dispatch: () => {
-    }
-    //....
-}
