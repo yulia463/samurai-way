@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../redux/users.module.css";
-import {UserType} from "../../redux/UsersReducer";
+import {toggleIsFollowingProgressAC, UserType} from "../../redux/UsersReducer";
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
 
@@ -12,6 +12,8 @@ type UsersType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
+    followingInProgress: number[]
+    toggleIsFollowingProgressAC: (isFetching: boolean, id: number) => void
 }
 
 export const Users = (props: UsersType) => {
@@ -42,42 +44,42 @@ export const Users = (props: UsersType) => {
                     <div className={styles.buttonFollow}>
                         {u.followed
                             ? <button
-                               // disabled={props.followingInProgress}
+                                disabled={props.followingInProgress.some(id => id === u.id)}
                                 onClick={() => {
-                              //  props.followingInProgress(true)
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow?page=${u.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "8c1e219f-9ff2-4bd6-a600-b07406352fbd"
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode == 0) {
-                                            props.unfollow(u.id);
+                                    props.toggleIsFollowingProgressAC(true, u.id)
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "8c1e219f-9ff2-4bd6-a600-b07406352fbd"
                                         }
-                                    //    props.followingInProgress(false)
-                                    });
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode == 0) {
+                                                props.unfollow(u.id);
+                                            }
+                                            props.toggleIsFollowingProgressAC(false, u.id)
+                                        });
 
-                            }}>Unfollow</button>
+                                }}>Unfollow</button>
 
                             : <button
-                               // disabled={props.followingInProgress}
+                                disabled={props.followingInProgress.some(id => id === u.id)}
                                 onClick={() => {
-                              //  props.followingInProgress(true)
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow?page=${u.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "8c1e219f-9ff2-4bd6-a600-b07406352fbd"
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode == 0) {
-                                            props.follow(u.id);
+                                    props.toggleIsFollowingProgressAC(true, u.id)
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "8c1e219f-9ff2-4bd6-a600-b07406352fbd"
                                         }
-                                       // props.followingInProgress(false)
-                                    });
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode == 0) {
+                                                props.follow(u.id);
+                                            }
+                                            props.toggleIsFollowingProgressAC(false, u.id)
+                                        });
 
-                            }}>Follow</button>}
+                                }}>Follow</button>}
 
 
                     </div>
