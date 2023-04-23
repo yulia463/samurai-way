@@ -14,7 +14,6 @@ type UsersType = {
     onPageChanged: (pageNumber: number) => void
     followingInProgress: number[]
     toggleIsFollowingProgressAC: (isFetching: boolean, id: number) => void
-    //lupa
 }
 
 export const Users = (props: UsersType) => {
