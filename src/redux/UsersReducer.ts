@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../Api/Api";
+
 const enum ActionTypeT {
     FOLLOW = 'FOLLOW',
     UNFOLLOW = 'UNFOLLOW',
@@ -82,13 +85,13 @@ export const usersReducer = (state = initialState, action: ActionType): InitialS
             return {...state, isFetching: action.isFetching}
         }
         case ActionTypeT.TOGGLE_IS_FOLLOWING_PROGRESS : {
-        return {
+            return {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.id]
                     : state.followingInProgress.filter(id => id !== action.id)
             }
-           // return state
+            // return state
         }
 
         default:
@@ -109,3 +112,14 @@ export const toggleIsFollowingProgressAC = (isFetching: boolean, id: number) => 
     isFetching,
     id
 } as const)
+
+export const getUsersTC = (currentPage:number,pageSize:number) => {
+    return  (dispatch: Dispatch) => {
+        dispatch(toggleIsFetchingAC(true))
+        usersAPI.getUsers(currentPage,pageSize).then(data => {
+            dispatch(toggleIsFetchingAC(false))
+            dispatch(setTotalUsersCount(data.totalCount)) ;
+            dispatch( setUsers(data.items))
+        });
+}
+}

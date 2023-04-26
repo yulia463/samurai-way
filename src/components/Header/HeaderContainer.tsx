@@ -4,12 +4,10 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/Redux-store";
 import {setAuthUserDataAC} from "../../redux/AuthReducer";
-import {UserType} from "../../redux/UsersReducer";
-import {DialogsPagesType} from "../../redux/DialogsReducer";
 
 
 export type HeaderPropsType = ReturnType<typeof mapStateToProps> & ReturnType<typeof setAuthUserDataAC>
-export class HeaderContainer extends React.Component<any, any> {
+export class HeaderContainer extends React.Component<any, AuthUserPropsType> {
     componentDidMount() {
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
