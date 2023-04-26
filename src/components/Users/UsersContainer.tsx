@@ -2,8 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     follow, getUsersTC,
-    setCurrentPage,
-   toggleIsFollowingProgressAC, unfollow,
+    setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetchingAC,
+    toggleIsFollowingProgressAC, unfollow,
     UserType
 } from "../../redux/UsersReducer";
 import {AppStateType} from "../../redux/Redux-store";
@@ -95,9 +95,9 @@ export default connect(mapStateToProps,
         follow,
         unfollow,
         setCurrentPage,
-        toggleIsFollowingProgressAC
-       // setUsers,
-       // setTotalUsersCount,
-      //  toggleIsFetchingAC,
+        toggleIsFollowingProgressAC,
+        setUsers,
+        setTotalUsersCount,
+        toggleIsFetchingAC,
     })(UsersContainer);
 
