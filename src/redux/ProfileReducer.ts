@@ -1,5 +1,7 @@
 import {PostDataType} from "./DialogsReducer";
 import {ActionsTypes} from "./ActionsType";
+import {Dispatch} from "redux";
+import {usersAPI} from "../Api/Api";
 
 export type InitialStateProfileType = typeof initialState;
 
@@ -61,4 +63,11 @@ export const setUserProfileAC = (profile: any) => {
         type: 'SET-USER-PROFILE',
         profile
     } as const
+};
+
+
+export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfileAC(response.data))
+    });
 };

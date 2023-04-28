@@ -47,7 +47,7 @@ export const Users = (props: UsersType) => {
                              src={u.photos.small !== null ? u.photos.small : 'https://abrakadabra.fun/uploads/posts/2021-12/1638968482_1-abrakadabra-fun-p-grustnii-pepe-1.png'}
                              className={styles.userPhoto}/>
                     </NavLink>
-                    <div className={styles.buttonFollow}>
+                    <div className={styles.buttonFollow} key={u.id}>
                         {u.followed
                             ? <button
                                 disabled={props.followingInProgress.some(id => id === u.id)}
