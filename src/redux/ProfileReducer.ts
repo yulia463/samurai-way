@@ -3,19 +3,54 @@ import {ActionsTypes} from "./ActionsType";
 import {Dispatch} from "redux";
 import {usersAPI} from "../Api/Api";
 
-export type InitialStateProfileType = typeof initialState;
+//export type InitialStateProfileType = typeof initialState;
 
+export type InitialStateType = {
+    posts: PostsPropsType[]
+    newPostText: string
+    profile: ProfileType | null
+
+}
+export type PostsPropsType = {
+    id: number
+    text: string
+    likesCount: number
+}
 let initialState = {
     posts: [
         {id: 1, text: "how do you like my social network?", likesCount: 7},
         {id: 2, text: "have questions ? ", likesCount: 48},
         {id: 3, text: " ask them on my LinkedIn", likesCount: 0}
-    ] as Array<PostDataType>,
+    ],
     newPostText: "",
     profile: null
 };
 
-export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionsTypes): InitialStateProfileType => {
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: null | string
+    youtube: null | string
+    mainLink: null | string
+}
+
+export type ProfileType = null | {
+    aboutMe: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: {
+        large: string
+        small: string
+    }
+}
+
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {

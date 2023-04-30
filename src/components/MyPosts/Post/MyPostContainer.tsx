@@ -1,13 +1,13 @@
 import React from "react";
 import MyPosts from "../MyPosts";
-import {addPostAC, InitialStateProfileType, updateNewTextAC} from "../../../redux/ProfileReducer";
+import {addPostAC, InitialStateType, updateNewTextAC} from "../../../redux/ProfileReducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/Redux-store";
 import {Dispatch} from "redux";
 
 
 type MapStateToPropsType = {
-    profileState: InitialStateProfileType
+    profileState: InitialStateType
 }
 type MapDispatchToPropsType = {
     addPost: () => void

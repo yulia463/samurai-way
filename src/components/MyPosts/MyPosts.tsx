@@ -1,14 +1,14 @@
 import React, {ChangeEvent,KeyboardEvent} from "react";
 import styles from './MyPosts.module.css'
 import Post from "./Post/Post";
-
 import {MyPostsPropsType} from "./Post/MyPostContainer";
+import {PostsPropsType} from "../../redux/ProfileReducer";
 
 
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElements = props.profileState.posts.map(el => <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
+    let postsElements = props.profileState.posts.map((el:PostsPropsType )=> <Post key={el.id} title={el.text} likesCount={el.likesCount}/>)
 
     const addPostHandler = () => {
         props.addPost()

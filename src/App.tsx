@@ -10,6 +10,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {follow, unfollow} from "./redux/UsersReducer";
+import {Login} from "./components/Login/Login";
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <BrowserRouter>
 
             <div className="App">
-                <HeaderContainer />
+                <HeaderContainer/>
                 <div className={"navAndContent"}>
 
                     <NavBar/>
@@ -30,7 +31,9 @@ function App() {
                         <Route path={"/news"} render={() => <News/>}/>
                         <Route path={"/music"} render={() => <Music/>}/>
                         <Route path={"/settings"} render={() => <Settings/>}/>
-                        <Route path={"/users"} render={() => <UsersContainer  />}/>
+                        <Route path={"/users"} render={() => <UsersContainer/>}/>
+                        <Route path={"/login"} render={() => <Login/>}/>
+
                     </div>
                 </div>
             </div>

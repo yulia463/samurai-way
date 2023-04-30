@@ -2,20 +2,10 @@ import React, {ChangeEvent} from "react";
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem";
 import {Message} from "./Message";
-import {DialogsDataType} from "../../redux/DialogsReducer";
 import {DispatchToPropsType, MapStateToPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
-// type DialogsPropsType = {
-//     dialogsData: Array<DialogsDataType>
-//     // messagesData: Array<MessagesDataType>
-//     // newMessageBody: string
-//     addMessage: () => void;
-//     updateNewMessageText: (text: string) => void;
-// }
-type MessagesDataType = {
-    id: number,
-    text: string
-}
+
 type DialogsPropsType = MapStateToPropsType & DispatchToPropsType
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -31,6 +21,7 @@ export const Dialogs = (props: DialogsPropsType) => {
         let body = e.target.value
         props.updateNewMessageText(body)
     }
+   if( props.isAuth === false) return <Redirect to={"/login"}/>
 
     return (
         <div className={styles.dialogs}>

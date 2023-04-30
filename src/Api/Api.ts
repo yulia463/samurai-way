@@ -16,19 +16,22 @@ export const usersAPI = {
     },
     acceptFollow(userId: number) {
         return instance.post(`follow/${userId}`)
+            .then(res => res.data)
     },
     acceptUnFollow(userId: number) {
         return instance.delete(`follow/${userId}`)
+            .then(res => res.data)
     },
     getProfile(userId: number) {
         return instance.get(`profile/` + userId)
+
 
     }
 
 }
 export const authAPI = {
-    me(){
-      return instance.get(`auth/me`)
+    me() {
+        return instance.get(`auth/me`)
     }
 }
 

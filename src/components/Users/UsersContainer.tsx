@@ -1,10 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    acceptFollow, getUsersTC,
+    getUsersTC,
     setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetchingAC,
-    toggleIsFollowingProgressAC, acceptUnFollow,
-    UserType
+    toggleIsFollowingProgressAC,
+    UserType, follow, unfollow
 } from "../../redux/UsersReducer";
 import {AppStateType} from "../../redux/Redux-store";
 import {Users} from "./Users";
@@ -83,8 +83,8 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
 export default connect(mapStateToProps,
     {
         getUsersTC,
-        acceptFollow,
-        acceptUnFollow,
+        follow,
+        unfollow,
         setCurrentPage,
         toggleIsFollowingProgressAC,
         setUsers,

@@ -6,7 +6,6 @@ type HeaderPropsType = {
     login: string | null
 }
 export const Header = (props: HeaderPropsType) => {
-    console.log(props)
     return (
         <header>
             <img alt={'profile avatar'}
