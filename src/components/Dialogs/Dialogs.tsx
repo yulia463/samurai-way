@@ -21,7 +21,7 @@ export const Dialogs = (props: DialogsPropsType) => {
         let body = e.target.value
         props.updateNewMessageText(body)
     }
-   if( props.isAuth === false) return <Redirect to={"/login"}/>
+  // if( !props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={styles.dialogs}>

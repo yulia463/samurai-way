@@ -9,6 +9,7 @@ import {
 import {AppStateType} from "../../redux/Redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {WithAuthRedirect} from "../../Hoc/WithAuthRedirect";
 
 
 type MapStateToPropsType = {
@@ -79,7 +80,7 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
     }
 }
 
-
+let withRedirect = WithAuthRedirect(UsersContainer)
 export default connect(mapStateToProps,
     {
         getUsersTC,

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {NavBar} from "./components/Nav/NavBar";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -26,6 +26,7 @@ function App() {
                         <Route
                             path={"/dialogs"}
                             render={() => <DialogsContainer/>}/>
+                        <Route path={'/'} render={() => <Redirect to={'/profile'} />}/>
                         <Route path={"/profile/:userId?"}
                                render={() => <ProfileContainer/>}/>
                         <Route path={"/news"} render={() => <News/>}/>
