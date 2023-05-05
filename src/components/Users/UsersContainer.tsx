@@ -81,19 +81,6 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
     }
 }
 
-//let withRedirect = WithAuthRedirect(UsersContainer)
-// export default connect(mapStateToProps,
-//     {
-//         getUsersTC,
-//         follow,
-//         unfollow,
-//         setCurrentPage,
-//         toggleIsFollowingProgressAC,
-//         setUsers,
-//         setTotalUsersCount,
-//         toggleIsFetchingAC,
-//     })(UsersContainer);
-
 export default compose<React.ComponentType>(
     WithAuthRedirect ,
     connect(mapStateToProps,

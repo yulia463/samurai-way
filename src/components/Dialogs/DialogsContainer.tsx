@@ -29,9 +29,6 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-// const AuthRedirectComponent = WithAuthRedirect(Dialogs);
-// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-
 export default compose<React.ComponentType>(
     connect(mapStateToProps,mapDispatchToProps),
     WithAuthRedirect
