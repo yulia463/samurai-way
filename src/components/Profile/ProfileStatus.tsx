@@ -4,7 +4,7 @@ import {log} from "util";
 
 type ProfileStatusType = {
     status: string
-    updateStatus: (status:string) => void
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
@@ -32,6 +32,17 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
             status: e.currentTarget.value
         });
 
+    }
+
+    componentDidUpdate(prevProps: any, prevState: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+
+                status: this.props.status
+
+
+            })
+        }
 
     }
 
