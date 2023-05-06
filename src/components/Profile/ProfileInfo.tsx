@@ -2,14 +2,17 @@ import React from "react";
 import styles from './ProfileInfo.module.css'
 import {Preloader} from "../Common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileType} from "../../redux/ProfileReducer";
 
-type ProfileInfoPropsType={
-    profile:any
+type ProfileInfoPropsType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (status:string) => void
 }
 
-export const ProfileInfo = (props:ProfileInfoPropsType) => {
+export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
-    if(!props.profile ){
+    if (!props.profile) {
         return <Preloader/>
     }
     return (
@@ -20,7 +23,7 @@ export const ProfileInfo = (props:ProfileInfoPropsType) => {
             {/*</div>*/}
             <div className={styles.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-               <ProfileStatus status={'You snus '}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
