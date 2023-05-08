@@ -121,7 +121,6 @@ export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
 };
 export const getStatusTC = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId).then(response => {
-
         dispatch(setStatusAC(response.data))
 
     });
