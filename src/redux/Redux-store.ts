@@ -9,13 +9,14 @@ export let rootReducer = combineReducers({
     profileReducer,
     dialogsReducer,
     usersPage: usersReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
+
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
 
-let store = createStore(rootReducer,applyMiddleware(thunkMiddleware));
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;
 
