@@ -2,11 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/Redux-store";
-import {getAuthUserDataTC, setAuthUserDataAC} from "../../redux/AuthReducer";
-
-
-
-//export type HeaderPropsType = ReturnType<typeof mapStateToProps> & ReturnType<typeof setAuthUserDataAC>
+import {getAuthUserDataTC} from "../../redux/AuthReducer";
 
 export class HeaderContainer extends React.Component<any, AuthUserPropsType> {
     componentDidMount() {
@@ -35,6 +31,5 @@ export type AuthUserPropsType = MapStateToPropsType & MapDispatchToPropsType
 type MapDispatchToPropsType = {
     setAuthUserDataAC: (id: number, email: string, login: string) => void
 }
-
 export default connect(mapStateToProps, {getAuthUserDataTC})(HeaderContainer)
-//{...this.props}
+

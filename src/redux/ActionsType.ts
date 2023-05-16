@@ -5,5 +5,5 @@ export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof updateNewTextAC> |
     ReturnType<typeof updateNewMessageBodyAC> |
     ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof setUserProfileAC>|
+    ReturnType<typeof setUserProfileAC> |
     ReturnType<typeof setStatusAC>

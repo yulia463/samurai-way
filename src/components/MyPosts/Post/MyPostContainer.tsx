@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/Redux-store";
 import {Dispatch} from "redux";
 
-
 type MapStateToPropsType = {
     profileState: InitialStateType
 }

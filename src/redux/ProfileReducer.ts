@@ -3,8 +3,6 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../Api/Api";
 import {setAuthUserDataAC} from "./AuthReducer";
 
-//export type InitialStateProfileType = typeof initialState;
-
 export type InitialStateType = {
     posts: PostsPropsType[]
     newPostText: string
