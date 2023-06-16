@@ -1,5 +1,7 @@
-import {Dispatch} from "redux";
+import {Action, AnyAction, Dispatch} from "redux";
 import {authAPI} from "../Api/Api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./Redux-store";
 
 const enum ActionTypeT {
     SET_USER_DATA = 'SET_USER_DATA',
@@ -43,7 +45,10 @@ export const setAuthUserDataAC = (id: string, email: string, login: string) => (
         login
     }
 } as const)
-export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
+
+
+export const getAuthUserDataTC = () => (
+    dispatch: Dispatch<Action>) => {
     authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -53,4 +58,13 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
         });
 }
 
+
+export const loginTC = (email: string, password: string, rememberMe: boolean) : ThunkAction<void, AppStateType, unknown, AnyAction> => dispatch =>  {
+    authAPI.login(email,password,rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+              dispatch(getAuthUserDataTC())
+            }
+        });
+}
 
