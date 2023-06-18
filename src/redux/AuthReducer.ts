@@ -37,12 +37,13 @@ export const AuthReducer = (state = initialState, action: ActionType): InitialSt
     }
 };
 
-export const setAuthUserDataAC = (id: string, email: string, login: string) => ({
+export const setAuthUserDataAC = (id: string | null, email: string|null, login: string|null, isAuth: boolean) => ({
     type: ActionTypeT.SET_USER_DATA,
     data: {
         id,
         email,
-        login
+        login,
+        isAuth
     }
 } as const)
 
@@ -53,18 +54,27 @@ export const getAuthUserDataTC = () => (
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {email, id, login} = response.data.data
-                dispatch(setAuthUserDataAC(id, email, login));
+                dispatch(setAuthUserDataAC(id, email, login,true));
             }
         });
 }
 
 
-export const loginTC = (email: string, password: string, rememberMe: boolean) : ThunkAction<void, AppStateType, unknown, AnyAction> => dispatch =>  {
-    authAPI.login(email,password,rememberMe)
+export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkAction<void, AppStateType, unknown, AnyAction> => dispatch => {
+    authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
-              dispatch(getAuthUserDataTC())
+                dispatch(getAuthUserDataTC())
             }
         });
 }
 
+export const logoutTC = (): ThunkAction<void, AppStateType, unknown, AnyAction> => dispatch => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserDataAC(null, null, null,false));
+
+            }
+        });
+}

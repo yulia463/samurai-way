@@ -1,7 +1,14 @@
 import React from 'react';
 import {Form, Formik, Field} from 'formik';
+import {connect, useDispatch} from "react-redux";
+import {loginTC} from "../../redux/AuthReducer";
+import {reduxForm} from "redux-form";
 
-export const LoginForm = () => {
+type LoginFormProps = {
+    onSubmit: (data: any) => void;
+}
+
+export const LoginForm = (props: LoginFormProps) => {
     return (
         <Formik
             initialValues={{
@@ -10,11 +17,11 @@ export const LoginForm = () => {
                 rememberMe: false,
             }}
             onSubmit={async (values) => {
-                console.log(values)
+                props.onSubmit(values)
             }}
         >
             <Form>
-                <Field id="login" name="login" placeholder="Login"/>
+                <Field id="email" name="email" placeholder="email"/>
                 <Field id="password" name="password" placeholder="Password" type={"password"}/>
                 <div>
                     <label htmlFor="rememberMe">
@@ -29,10 +36,18 @@ export const LoginForm = () => {
         </Formik>)
 
 }
+// const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
-export const Login = () => {
+const Login = (props: any) => {
+    const dispatch = useDispatch();
+    const onSubmit = (formData: any) => {
+        dispatch(loginTC(formData.email, formData.password, formData.rememberMe))
+
+    }
     return <div>
         <h1>LOGIN</h1>
-        <LoginForm/>
+        <LoginForm onSubmit={onSubmit}/>
+        {/*<LoginReduxForm onSubmit={onSubmit}/>*/}
     </div>
 }
+export default connect(null, {loginTC})(Login)

@@ -113,7 +113,7 @@ export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId).then(response => {
 
         dispatch(setUserProfileAC(response.data))
-        dispatch(setAuthUserDataAC('2', 'test', 'eyeye'))
+        dispatch(setAuthUserDataAC('2', 'test', 'eyeye',true))
 
     });
 };
