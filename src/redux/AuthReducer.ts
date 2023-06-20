@@ -74,7 +74,6 @@ export const logoutTC = (): ThunkAction<void, AppStateType, unknown, AnyAction> 
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(null, null, null,false));
-
             }
         });
 }

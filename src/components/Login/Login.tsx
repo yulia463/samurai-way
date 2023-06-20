@@ -2,7 +2,6 @@ import React from 'react';
 import {Form, Formik, Field} from 'formik';
 import {connect, useDispatch} from "react-redux";
 import {loginTC} from "../../redux/AuthReducer";
-import {reduxForm} from "redux-form";
 
 type LoginFormProps = {
     onSubmit: (data: any) => void;
