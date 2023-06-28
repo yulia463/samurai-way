@@ -3,9 +3,11 @@ import {Form, Formik, Field} from 'formik';
 import {connect, useDispatch} from "react-redux";
 import {loginTC} from "../../redux/AuthReducer";
 import {Redirect} from "react-router-dom";
+import styles from '../Common/FormsControls/FormsControls.module.css'
 
 type LoginFormProps = {
     onSubmit: (data: any) => void;
+    error?:string|null
 }
 
 export const LoginForm = (props: LoginFormProps) => {
@@ -29,6 +31,9 @@ export const LoginForm = (props: LoginFormProps) => {
                         Remember me
                     </label>
                 </div>
+                {props.error && <div className={styles.formSumaryError}>
+                    {props.error}
+                </div>}
                 <div>
                     <button type={"submit"}>Login</button>
                 </div>
@@ -43,7 +48,7 @@ const Login = (props: any) => {
     const onSubmit = (formData: any) => {
         dispatch(loginTC(formData.email, formData.password, formData.rememberMe))
     }
-    if(props.isAuth){
+    if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
     return <div>
@@ -51,7 +56,7 @@ const Login = (props: any) => {
         <LoginForm onSubmit={onSubmit}/>
     </div>
 }
-const mapStateToProps =(state:any)=>({
-    isAuth:state.auth.isAuth
+const mapStateToProps = (state: any) => ({
+    isAuth: state.auth.isAuth
 })
 export default connect(mapStateToProps, {loginTC})(Login)
